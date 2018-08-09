@@ -1,0 +1,17 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+}
+
+#ulNotas li{
+    list-style:none;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+#ulRecetas li{
+    list-style:none;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
