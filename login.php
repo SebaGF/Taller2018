@@ -17,7 +17,11 @@
         if($user = $conn->siguienteRegistro()){
             $_SESSION["user"] = $user;
             $_SESSION["user"]["logueado"] = true;
-            header("location: index.php");
+            if($user[nombre] == "admin"){
+                header("location: admin.php");
+            }else{
+                header("location: index.php");
+            }
             die();
         } else {
             $mensaje = "El usuario o contraseña ingresados son invalidos.";

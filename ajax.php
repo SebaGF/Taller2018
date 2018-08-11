@@ -4,8 +4,20 @@
 include("configuracion.php");
 
 $accion = isset($_POST["accion"]) ? $_POST["accion"] : $_GET["accion"];
+if(strlen($accion) && $accion == "traerCategorias"){
 
-if(strlen($accion) && $accion == "cargarRecetas"){
+    $conn->conectar();    
+    $conn->consulta("SELECT * FROM  `categorias`");
+    if($resultado = $conn->restantesRegistros()){
+        echo json_encode($resultado);
+    } else {
+        echo json_encode(array("error" => $conn->ultimoError()));
+    }
+    
+    $conn->desconectar();
+    
+    die();
+}else if(strlen($accion) && $accion == "cargarRecetas"){
     /*
     if(!($_SESSION["user"]["logueado"])){
         die( json_encode(array("error" => "Debe estar autenticado para realizar esta consulta.")) );
@@ -19,9 +31,9 @@ if(strlen($accion) && $accion == "cargarRecetas"){
     } else {
         echo json_encode(array("error" => $conn->ultimoError()));
     }
-    
+
     $conn->desconectar();
-    
+
     die();
 } else if(strlen($accion) && $accion == "cargarNotas"){
     /*

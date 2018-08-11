@@ -1,0 +1,27 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    background-color: #F4F6F6;
+    font-family: Verdana;
+}
+
+.divSuperior {
+    width: 100%;
+    height: 5%; 
+    background-color: black;
+}
+
+.adminCategorias {
+    width: 50%;
+    height: 100%;
+    float: left;
+    border: groove 1px;
+}
+
+.adminPublicaciones {
+    width: 50%;
+    height: 100%;
+    float: left;
+    border: groove 1px;
+}
