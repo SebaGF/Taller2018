@@ -17,7 +17,8 @@
         if($user = $conn->siguienteRegistro()){
             $_SESSION["user"] = $user;
             $_SESSION["user"]["logueado"] = true;
-            if($user[nombre] == "admin"){
+            $_SESSION["user"]["administrador"] = ord($user["administrador"]);
+            if($_SESSION["user"]["administrador"]){
                 header("location: admin.php");
             }else{
                 header("location: index.php");

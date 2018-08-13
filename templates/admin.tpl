@@ -32,21 +32,48 @@
                      </ul>
                     
                     <div id="agregarCategoria">
+                        <br />
                         <form action="admin.php" method="POST">
                             <div class="form-group">
                               <label for="exampleInputEmail1">Nombre</label>
-                              <input type="text" class="form-control" id="nombreCategoria" name="nombreCategoria" placeholder="Nombre">
+                              <input type="text" class="form-control" id="nombreCategoria" style="width: 50%;margin-left: 25%;" name="nombreCategoria" placeholder="Nombre">
                             </div>
                             <input type="hidden" name="accion" value="agregarCategoria" />
                             <button type="submit" id="botonAgregarCategoria" class="btn btn-primary">Agregar</button>
                          </form>
-                        {$mensaje}
                     </div>
                     <div id="eliminarCategoria">
-                        Eliminarcategoria
+                        <br />
+                        <form action="?" method="post" name="listaCategorias">
+				<ul id="ulCategorias">
+                                    {foreach from=$categorias item=cat}
+					<li style="list-style: none">
+                                            <span><input type="checkbox" name="categoria_id[{$cat.categoria_id}]" value="1" /></span>
+                                            {$cat.nombre}<br />
+					</li>
+                                    {/foreach}
+				</ul>
+                                <button type="submit" id="botonEliminarCategoria" class="btn btn-primary">Eliminar</button>
+			</form>                        
                     </div>
                     <div id="editarCategoria">
-                        Editar categoria
+                        <br />
+                        <select class="form-control" name="selectCategoria" id="selectCategoria" style="width: 50%;margin-left: 25%;">
+                            {foreach from=$categorias item=cat}
+                                    <option value="{$cat.categoria_id}">{$cat.nombre}</option>
+                            {/foreach}
+                        </select>
+                        <br />
+                        <form action="admin.php" method="POST">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Nombre</label>
+                              <input type="text" class="form-control" id="nombreEditarCategoria" style="width: 50%;margin-left: 25%;" name="nombreEditarCategoria" placeholder="Nombre">
+                            </div>
+                            <input type="hidden" id="idEditarCategoria" name="idEditarCategoria" />
+                            <input type="hidden" name="accion" value="editarCategoria" />
+                            <button type="submit" id="botonEditarCategoria" class="btn btn-primary">Editar</button>
+                         </form>
+                                
                     </div>
                 </div>
 
@@ -66,7 +93,36 @@
                      </ul>
                     
                     <div id="agregarPublicacion">
-                        Agregar Publicacion
+                        <br />
+                        <form action="admin.php" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Nombre</label>
+                              <br />
+                              <input type="text" class="form-control" id="tituloPublicacion" style="width: 50%;margin-left: 25%;" name="tituloPublicacion" placeholder="Titulo">
+                              <br />
+                              <select class="form-control" name="selectCategoriaPublicacion" id="selectCategoriaPublicacion" style="width: 50%;margin-left: 25%;">
+                                    <option value="" disabled selected>Categoria</option>
+                                    {foreach from=$categorias item=cat}
+                                            <option value="{$cat.categoria_id}">{$cat.nombre}</option>
+                                    {/foreach}
+                              </select>
+                              <br />
+                              <select class="form-control" name="selectTipoPublicacion" id="selectTipoPublicacion" style="width: 50%;margin-left: 25%;">
+                                    <option value="" disabled selected>Tipo</option>
+                                    {foreach from=$tipos item=tipo}
+                                            <option value="{$tipo.tipo_id}">{$tipo.nombre}</option>
+                                    {/foreach}
+                              </select>
+                              <br />
+                              <input type="file" id="imagen" name="imagen" style="margin-left: 25%;" />
+                              <!-- IMAGEN -->
+                              <br />
+                              <textarea class="form-control" id="descripcionPublicacion" name="descripcionPublicacion" nombre="descripcionPublicacion" rows="3" style="width: 50%;margin-left: 25%;" placeholder="Descripcion.."></textarea>
+                            </div>
+                            <input type="hidden" name="accion" value="agregarPublicacion" />
+                            <button type="submit" id="botonAgregarPublicacion" class="btn btn-primary">Agregar</button>
+                         </form>
+                              
                     </div>
                     <div id="eliminarPublicacion">
                         Eliminar Publicacion

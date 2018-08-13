@@ -53,4 +53,39 @@ if(strlen($accion) && $accion == "traerCategorias"){
     $conn->desconectar();
     
     die();
-}
+}else  if(strlen($accion) && $accion == "eliminarCategorias"){
+    if(!isset($_POST["categoria_id"])){
+        retornar("Debe seleccionar algun contacto a eliminar.");        
+    }
+    
+    sleep(1);
+        
+    $conn->conectar();
+        
+    $categorias = "";
+    foreach($_POST["categoria_id"] as $k => $v){
+        if(strlen($categorias)){
+            $categorias .= "or ";
+        }
+        $categorias .= "categoria_id = " . (int)$k . " ";
+    }
+
+    $valor = $conn->consulta("UPDATE  `blogdecocina`.`categorias` SET  `eliminado` = 1 WHERE  ({$categorias})");
+    
+    $resultado = $conn->restantesRegistros();
+        
+    $error = $conn->ultimoError();
+    
+    $conn->desconectar();
+
+    if($valor){
+        retornar("ok");
+    } else {
+        retornar("Error: " . $error);
+    }
+ }
+ 
+ function retornar($mensaje){
+    $respuesta = array("resultado" => $mensaje);
+    die(json_encode($respuesta));
+ }
